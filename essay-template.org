@@ -1,0 +1,141 @@
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,14pt]
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usepackage{pgfplots}
+#+LATEX_HEADER: \usepackage{siunitx}
+#+LATEX_HEADER: \renewcommand{\familydefault}{\sfdefault}
+#+TITLE: Essay Template In org-mode
+#+LANGUAGE: en
+#+AUTHOR: Your Name
+#+OPTIONS: h:4 num:t tags:nil todo:nil ':t ^:{} toc:nil
+
+* Introduction
+
+  When writing Essays to be typeset by \LaTeX, it's a good idea to
+  rely on a simple template that takes care of some of the work.
+
+  This is reason why this little template was created. While I can
+  write pure \LaTeX, having the =org-mode= frontend really helps
+  reducing the amount of boilerplate code we have to write. We can
+  focus on the content much more by removing the \LaTeX clutter.
+
+* Sectioning
+
+  Sections are created by starting a line with the * symbol. To create
+  subsections and subsubsections (and so on) all we have to do is add
+  more * symbols. For example, let's create a subsection
+  
+**  Subsection
+
+   This is a subsection. All text from here on out - until we find
+   another section/subsection/etc will be part of the current text
+   level.
+
+* Typessing math
+
+  In =org-mode= we can embed \LaTeX at any point in the code. For
+  example we can render the following equation by just adding it to
+  the text:
+
+  #+BEGIN_SRC latex
+    \begin{equation}
+      \begin{aligned}
+	\sum_{k = 0}^n k = \frac{n \cdot (n + 1)}{2}
+      \end{aligned}
+    \end{equation}
+  #+END_SRC
+
+  \begin{equation}
+    \begin{aligned}
+      \sum_{k = 0}^n k = \frac{n \cdot (n + 1)}{2}
+    \end{aligned}
+  \end{equation}
+
+** Figures
+
+   If we add the correct packages, we can also generate figures using
+   =tikz=.
+
+   #+BEGIN_SRC latex
+     \begin{tikzpicture}
+       \begin{axis}[domain=-3:7,
+	   legend pos=outer north east,
+	   width=12cm,
+	   height=8cm,
+	   grid=both,
+	   grid style={line width=.1pt, draw=gray!10},
+	   axis line style={latex-latex},
+	   xmin=-3,
+	   xmax=7,
+	   ymin=-1.5,
+	   ymax=1.5,
+	   minor tick num=5,
+	   axis lines=middle]
+
+	 \addplot [green, samples=500] {sin(deg(x))}; 
+	 \addplot [purple, samples=500] {sin(deg(x + pi/2))}; 
+	 \addplot [red, samples=500] {sin(deg(x + 3*pi/2))}; 
+	 \addplot [gray, samples=500] {sin(deg(x + pi))}; 
+
+	 \addplot [teal, samples=500] {sin(deg(x + pi/4))}; 
+	 \addplot [blue, samples=500] {sin(deg(x + 3*pi/4)}; 
+	 \addplot [magenta, samples=500] {sin(deg(x + 5*pi/4))}; 
+	 \addplot [black, samples=500] {sin(deg(x + 7*pi/4))}; 
+
+	 \legend{$\sin(x)$,
+	   $\sin(x + \frac{\pi}{2})$,
+	   $\sin(x + \frac{3\pi}{2})$,
+	   $\sin(x + \pi)$,
+	   $\sin(x + \frac{\pi}{4})$,
+	   $\sin(x + \frac{3\pi}{4})$,
+	   $\sin(x + \frac{5\pi}{4})$,
+	   $\sin(x + \frac{7\pi}{4})$
+	 }
+       \end{axis}
+     \end{tikzpicture}
+   #+END_SRC
+
+   \begin{tikzpicture}
+     \begin{axis}[domain=-3:7,
+       legend pos=outer north east,
+       width=12cm,
+       height=8cm,
+       grid=both,
+       grid style={line width=.1pt, draw=gray!10},
+       axis line style={latex-latex},
+       xmin=-3,
+       xmax=7,
+       ymin=-1.5,
+       ymax=1.5,
+       minor tick num=5,
+       axis lines=middle]
+
+      \addplot [green, samples=500] {sin(deg(x))}; 
+      \addplot [purple, samples=500] {sin(deg(x + pi/2))}; 
+      \addplot [red, samples=500] {sin(deg(x + 3*pi/2))}; 
+      \addplot [gray, samples=500] {sin(deg(x + pi))}; 
+
+      \addplot [teal, samples=500] {sin(deg(x + pi/4))}; 
+      \addplot [blue, samples=500] {sin(deg(x + 3*pi/4)}; 
+      \addplot [magenta, samples=500] {sin(deg(x + 5*pi/4))}; 
+      \addplot [black, samples=500] {sin(deg(x + 7*pi/4))}; 
+
+      \legend{$\sin(x)$,
+        $\sin(x + \frac{\pi}{2})$,
+        $\sin(x + \frac{3\pi}{2})$,
+        $\sin(x + \pi)$,
+        $\sin(x + \frac{\pi}{4})$,
+        $\sin(x + \frac{3\pi}{4})$,
+        $\sin(x + \frac{5\pi}{4})$,
+        $\sin(x + \frac{7\pi}{4})$
+      }
+    \end{axis}
+  \end{tikzpicture}
+
+* Conclusion
+
+  =org-mode= helps reducing the amount of =\= characters used but you
+  can still embed \LaTeX anywhere you want.
